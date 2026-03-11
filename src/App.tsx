@@ -11,6 +11,7 @@ import Feedback from './pages/Feedback';
 import QuickGuide from './pages/QuickGuide';
 import SpaceDetail from './pages/SpaceDetail';
 import ContentDetail from './pages/ContentDetail';
+import Contact from './pages/Contact';
 import { AuthProvider } from './context/AuthContext';
 import './App.css';
 
@@ -28,6 +29,7 @@ function App() {
           <Route path="/spaces" element={<Spaces />} />
           <Route path="/space/:spaceId" element={<SpaceDetail />} />
           <Route path="/content/:contentId" element={<ContentDetail />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/help" element={<HelpTools />} />
           <Route path="/feedback" element={<Feedback />} />
           <Route path="/guide" element={<QuickGuide />} />

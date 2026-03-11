@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
-  ChevronDown, 
   Upload, 
   Link2, 
   Mic, 
@@ -14,22 +13,24 @@ import {
   Minus,
   Star,
   CheckCircle,
-  Sparkles
+  Sparkles,
+  Mail,
+  MapPin
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/context/AuthContext';
 import { testimonials } from '@/data/mockData';
 
-// LearnIn Logo Component
-function LearnInLogo({ size = 32 }: { size?: number }) {
+// ProntoTech Logo Component
+function ProntoTechLogo() {
   return (
     <div className="flex items-center">
-      <svg width={size} height={size} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M4 6C4 4.89543 4.89543 4 6 4H10C11.1046 4 12 4.89543 12 6V26C12 27.1046 11.1046 28 10 28H6C4.89543 28 4 27.1046 4 26V6Z" fill="black"/>
-        <path d="M14 10C14 8.89543 14.8954 8 16 8H18C19.1046 8 20 8.89543 20 10V22C20 23.1046 19.1046 24 18 24H16C14.8954 24 14 23.1046 14 22V10Z" fill="black"/>
-        <path d="M22 14C22 12.8954 22.8954 12 24 12H26C27.1046 12 28 12.8954 28 14V18C28 19.1046 27.1046 20 26 20H24C22.8954 20 22 19.1046 22 18V14Z" fill="black"/>
-      </svg>
-      <span className="ml-2 text-xl font-semibold text-gray-900">NurseAI Academy</span>
+      <img 
+        src="https://img1.wsimg.com/isteam/ip/bd25398c-5bc5-4a04-b529-d558df7fc5b8/Logo%20ProntoTech%20Ai.png/:/rs=w:120,h:80,cg:true,m/cr=w:120,h:80/qt=q:95" 
+        alt="ProntoTech AI Logo" 
+        className="h-8 w-auto"
+      />
+      <span className="ml-2 text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600">ProntoTech AI</span>
     </div>
   );
 }
@@ -37,7 +38,6 @@ function LearnInLogo({ size = 32 }: { size?: number }) {
 // Navigation Component
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isFeaturesOpen, setIsFeaturesOpen] = useState(false);
   const { isAuthenticated, user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -55,34 +55,11 @@ function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <LearnInLogo size={28} />
+            <ProntoTechLogo />
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <div className="relative">
-              <button 
-                className="flex items-center text-gray-600 hover:text-gray-900 transition-colors"
-                onMouseEnter={() => setIsFeaturesOpen(true)}
-                onMouseLeave={() => setIsFeaturesOpen(false)}
-              >
-                Features <ChevronDown className="ml-1 w-4 h-4" />
-              </button>
-              {isFeaturesOpen && (
-                <div 
-                  className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-lg border border-gray-100 py-2"
-                  onMouseEnter={() => setIsFeaturesOpen(true)}
-                  onMouseLeave={() => setIsFeaturesOpen(false)}
-                >
-                  <a href="#features" className="block px-4 py-2 text-gray-700 hover:bg-gray-50">AI Tutor</a>
-                  <a href="#features" className="block px-4 py-2 text-gray-700 hover:bg-gray-50">Quiz Generator</a>
-                  <a href="#features" className="block px-4 py-2 text-gray-700 hover:bg-gray-50">Study Notes</a>
-                  <a href="#features" className="block px-4 py-2 text-gray-700 hover:bg-gray-50">Flashcards</a>
-                </div>
-              )}
-            </div>
-            <Link to="/pricing" className="text-gray-600 hover:text-gray-900 transition-colors">Pricing</Link>
-            <Link to="/careers" className="text-gray-600 hover:text-gray-900 transition-colors">Careers</Link>
           </div>
 
           {/* Right Side */}
@@ -115,9 +92,6 @@ function Navbar() {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-gray-100">
-            <a href="#features" className="block py-2 text-gray-600">Features</a>
-            <Link to="/pricing" className="block py-2 text-gray-600">Pricing</Link>
-            <Link to="/careers" className="block py-2 text-gray-600">Careers</Link>
             {isAuthenticated ? (
               <>
                 <Link to="/dashboard" className="block py-2 text-gray-600">Dashboard</Link>
@@ -366,7 +340,7 @@ function FAQSection() {
     },
     {
       question: 'Does LearnIn make quizzes, flashcards, and practice tests?',
-      answer: 'Absolutely! LearnIn automatically generates quizzes, flashcards, and practice tests from your materials. You can customize the difficulty level and focus on specific topics you want to master.'
+      answer: 'Absolutely! ProntoTech AI automatically generates quizzes, flashcards, and practice tests from your materials. You can customize the difficulty level and focus on specific topics you want to master.'
     },
     {
       question: 'Is NurseAI Academy free for students?',
@@ -402,6 +376,75 @@ function FAQSection() {
               )}
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Contact Section
+function ContactSection() {
+  return (
+    <section id="contact" className="py-24 bg-gray-50 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <h2 className="text-4xl md:text-5xl font-semibold text-gray-900 mb-8">
+              Contact Us
+            </h2>
+            <p className="text-xl text-gray-600 mb-12">
+              Ready to revolutionize your business with AI? Get in touch with our team today.
+            </p>
+            
+            <Link to="/contact">
+              <Button className="bg-black text-white hover:bg-gray-800 rounded-full px-8 py-6 text-lg mb-12">
+                Visit Contact Page
+              </Button>
+            </Link>
+            
+            <div className="space-y-8">
+              <div className="flex items-start">
+                <div className="flex-shrink-0 w-12 h-12 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center mr-4">
+                  <MapPin className="w-6 h-6 text-gray-700" />
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold text-gray-900">Office Location</h4>
+                  <p className="text-gray-600">828 Busse Highway, Park Ridge, IL, USA</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start">
+                <div className="flex-shrink-0 w-12 h-12 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center mr-4">
+                  <Mail className="w-6 h-6 text-gray-700" />
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold text-gray-900">Email Address</h4>
+                  <a href="mailto:info@prontotech.ai" className="text-blue-600 hover:underline">info@prontotech.ai</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="relative">
+            <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
+              <img 
+                src="https://img1.wsimg.com/isteam/getty/2159943683/:/cr=t:0%25,l:28.91%25,w:42.19%25,h:100%25/rs=w:1200,h:1600,cg:true" 
+                alt="AI Robotic Hand" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-xl border border-gray-100 hidden md:block">
+              <div className="flex items-center space-x-3">
+                <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center">
+                  <Sparkles className="w-6 h-6 text-blue-600" />
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-gray-900">AI Innovation</p>
+                  <p className="text-xs text-gray-500">ProntoTech Solutions</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -456,29 +499,48 @@ function Footer() {
   const links = [
     { label: 'Blog', href: '#' },
     { label: 'Help Center', href: '/help' },
-    { label: 'Careers', href: '#' },
     { label: 'Terms', href: '#' },
     { label: 'Privacy', href: '#' },
-    { label: 'Contact', href: '/feedback' },
+    { label: 'Contact', href: '/contact' },
   ];
 
   return (
-    <footer className="py-8 bg-gray-50 border-t border-gray-200">
+    <footer className="py-12 bg-white border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row items-center justify-between">
-          <div className="flex items-center mb-4 md:mb-0">
-            <LearnInLogo size={24} />
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+          <div className="col-span-1 md:col-span-2">
+            <ProntoTechLogo />
+            <p className="mt-4 text-gray-500 max-w-sm">
+              Providing cutting-edge AI solutions to empower healthcare professionals and organizations.
+            </p>
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-6 mb-4 md:mb-0">
-            {links.map((link, i) => (
-              <Link key={i} to={link.href} className="text-gray-600 hover:text-gray-900 text-sm transition-colors">
-                {link.label}
-              </Link>
-            ))}
+          <div>
+            <h4 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4">Quick Links</h4>
+            <div className="flex flex-col space-y-2">
+              {links.map((link, i) => (
+                <Link key={i} to={link.href} className="text-gray-600 hover:text-gray-900 text-sm transition-colors">
+                  {link.label}
+                </Link>
+              ))}
+            </div>
           </div>
+          <div>
+            <h4 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4">Contact</h4>
+            <div className="space-y-2 text-sm text-gray-600">
+              <p>828 Busse Highway</p>
+              <p>Park Ridge, IL, USA</p>
+              <p className="pt-2">info@prontotech.ai</p>
+            </div>
+          </div>
+        </div>
+        <div className="pt-8 border-t border-gray-100 flex flex-col md:flex-row items-center justify-between">
           <p className="text-gray-500 text-sm">
-            © 2024 NurseAI Academy. All rights reserved.
+            © 2024 ProntoTech AI Solutions. All rights reserved.
           </p>
+          <div className="flex space-x-6 mt-4 md:mt-0">
+            <a href="#" className="text-gray-400 hover:text-gray-600">Terms</a>
+            <a href="#" className="text-gray-400 hover:text-gray-600">Privacy</a>
+          </div>
         </div>
       </div>
     </footer>
@@ -494,6 +556,7 @@ export default function LandingPage() {
       <FeaturesSection />
       <TestimonialsSection />
       <FAQSection />
+      <ContactSection />
       <CTASection />
       <Footer />
     </div>

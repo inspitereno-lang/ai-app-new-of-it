@@ -12,7 +12,8 @@ import {
   ChevronDown,
   ChevronRight,
   Library,
-  X
+  X,
+  Mail
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { spaces } from '@/data/mockData';
@@ -21,16 +22,16 @@ interface LayoutProps {
   children: React.ReactNode;
 }
 
-// NurseAI Logo Component
-export function NurseAILogo({ size = 28 }: { size?: number }) {
+// ProntoTech Logo Component
+export function ProntoTechLogo() {
   return (
     <div className="flex items-center">
-      <svg width={size} height={size} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M4 6C4 4.89543 4.89543 4 6 4H10C11.1046 4 12 4.89543 12 6V26C12 27.1046 11.1046 28 10 28H6C4.89543 28 4 27.1046 4 26V6Z" fill="black"/>
-        <path d="M14 10C14 8.89543 14.8954 8 16 8H18C19.1046 8 20 8.89543 20 10V22C20 23.1046 19.1046 24 18 24H16C14.8954 24 14 23.1046 14 22V10Z" fill="black"/>
-        <path d="M22 14C22 12.8954 22.8954 12 24 12H26C27.1046 12 28 12.8954 28 14V18C28 19.1046 27.1046 20 26 20H24C22.8954 20 22 19.1046 22 18V14Z" fill="black"/>
-      </svg>
-      <span className="ml-2 font-semibold text-gray-900">NurseAI</span>
+      <img
+        src="https://img1.wsimg.com/isteam/ip/bd25398c-5bc5-4a04-b529-d558df7fc5b8/Logo%20ProntoTech%20Ai.png/:/rs=w:120,h:80,cg:true,m/cr=w:120,h:80/qt=q:95"
+        alt="ProntoTech AI Logo"
+        className="h-8 w-auto"
+      />
+      <span className="ml-2 font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600">ProntoTech AI</span>
     </div>
   );
 }
@@ -41,10 +42,11 @@ function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
   const location = useLocation();
   const { logout, user } = useAuth();
   const [expandedSections, setExpandedSections] = useState<string[]>(['spaces']);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const toggleSection = (section: string) => {
-    setExpandedSections(prev => 
-      prev.includes(section) 
+    setExpandedSections(prev =>
+      prev.includes(section)
         ? prev.filter(s => s !== section)
         : [...prev, section]
     );
@@ -59,19 +61,27 @@ function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
 
   const mainMenuItems = [
     { id: 'add', icon: <Plus className="w-4 h-4" />, label: 'Add course', action: () => navigate('/dashboard') },
-    { id: 'search', icon: <Search className="w-4 h-4" />, label: 'Search', action: () => {} },
     { id: 'history', icon: <Clock className="w-4 h-4" />, label: 'History', path: '/history' },
   ];
 
   const helpItems = [
     { id: 'guide', icon: <BookOpen className="w-4 h-4" />, label: 'Quick Guide', path: '/guide' },
+    { id: 'contact', icon: <Mail className="w-4 h-4" />, label: 'Contact Support', path: '/contact' },
   ];
+
+  const filteredMainMenu = mainMenuItems.filter(item =>
+    item.label.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const filteredSpaces = spaces.filter(space =>
+    space.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <>
       {/* Mobile Overlay */}
       {isOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
           onClick={onClose}
         />
@@ -87,28 +97,43 @@ function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-gray-100">
           <Link to="/dashboard">
-            <NurseAILogo size={28} />
+            <ProntoTechLogo />
           </Link>
           <button onClick={onClose} className="lg:hidden p-1 hover:bg-gray-100 rounded">
             <X className="w-5 h-5" />
           </button>
         </div>
 
+        {/* Search Bar */}
+        <div className="p-4 border-b border-gray-100">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search..."
+              className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-black transition-all"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+        </div>
+
         {/* Scrollable Content */}
         <div className="flex-1 overflow-y-auto">
           {/* Main Menu */}
           <div className="p-2">
-            {mainMenuItems.map((item) => (
+            {filteredMainMenu.map((item) => (
               item.path ? (
                 <Link
                   key={item.id}
                   to={item.path}
-                  className={`w-full flex items-center px-3 py-2 text-sm rounded-lg transition-colors ${
-                    isActive(item.path) ? 'bg-gray-100 text-gray-900' : 'text-gray-700 hover:bg-gray-100'
-                  }`}
+                  className={`w-full flex items-center px-3 py-2 text-sm rounded-lg transition-colors ${isActive(item.path) ? 'bg-gray-100 text-gray-900' : 'text-gray-700 hover:bg-gray-100'
+                    }`}
                 >
-                  {item.icon}
-                  <span className="ml-3">{item.label}</span>
+                  <div className="w-5 h-5 flex items-center justify-center mr-3">
+                    {item.icon}
+                  </div>
+                  <span>{item.label}</span>
                 </Link>
               ) : (
                 <button
@@ -116,8 +141,10 @@ function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
                   onClick={item.action}
                   className="w-full flex items-center px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
                 >
-                  {item.icon}
-                  <span className="ml-3">{item.label}</span>
+                  <div className="w-5 h-5 flex items-center justify-center mr-3">
+                    {item.icon}
+                  </div>
+                  <span>{item.label}</span>
                 </button>
               )
             ))}
@@ -125,7 +152,7 @@ function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
 
           {/* Spaces Section */}
           <div className="px-4 py-2">
-            <button 
+            <button
               onClick={() => toggleSection('spaces')}
               className="flex items-center justify-between w-full mb-2"
             >
@@ -143,15 +170,14 @@ function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
             </button>
             {expandedSections.includes('spaces') && (
               <div className="space-y-1">
-                {spaces.map((space) => (
+                {filteredSpaces.map((space) => (
                   <Link
                     key={space.id}
                     to={`/space/${space.id}`}
-                    className={`w-full flex items-center justify-between px-3 py-2 text-sm rounded-lg transition-colors ${
-                      location.pathname === `/space/${space.id}`
-                        ? 'bg-gray-100 text-gray-900' 
+                    className={`w-full flex items-center justify-between px-3 py-2 text-sm rounded-lg transition-colors ${location.pathname === `/space/${space.id}`
+                        ? 'bg-gray-100 text-gray-900'
                         : 'text-gray-600 hover:bg-gray-50'
-                    }`}
+                      }`}
                   >
                     <div className="flex items-center">
                       <FolderOpen className="w-4 h-4 mr-2" />
@@ -167,9 +193,8 @@ function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
           <div className="px-2 py-2">
             <Link
               to="/library"
-              className={`w-full flex items-center justify-between px-3 py-2 text-sm rounded-lg transition-colors ${
-                isActive('/library') ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50'
-              }`}
+              className={`w-full flex items-center justify-between px-3 py-2 text-sm rounded-lg transition-colors ${isActive('/library') ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50'
+                }`}
             >
               <div className="flex items-center">
                 <Library className="w-4 h-4 mr-2" />
@@ -187,9 +212,8 @@ function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
                   <Link
                     key={item.id}
                     to={item.path}
-                    className={`w-full flex items-center px-3 py-2 text-sm rounded-lg transition-colors ${
-                      isActive(item.path) ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50'
-                    }`}
+                    className={`w-full flex items-center px-3 py-2 text-sm rounded-lg transition-colors ${isActive(item.path) ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50'
+                      }`}
                   >
                     {item.icon}
                     <span className="ml-3">{item.label}</span>
@@ -247,7 +271,7 @@ export default function Layout({ children }: LayoutProps) {
           <button onClick={() => setSidebarOpen(true)}>
             <Menu className="w-6 h-6" />
           </button>
-          <NurseAILogo size={24} />
+          <ProntoTechLogo />
           <div className="w-6" />
         </div>
         <main className="flex-1 overflow-y-auto">

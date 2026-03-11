@@ -5,16 +5,16 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useAuth } from '@/context/AuthContext';
 
-// NurseAI Academy Logo Component
-function NurseAILogo({ size = 28 }: { size?: number }) {
+// ProntoTech Logo Component
+function ProntoTechLogo() {
   return (
     <div className="flex items-center">
-      <svg width={size} height={size} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M4 6C4 4.89543 4.89543 4 6 4H10C11.1046 4 12 4.89543 12 6V26C12 27.1046 11.1046 28 10 28H6C4.89543 28 4 27.1046 4 26V6Z" fill="black"/>
-        <path d="M14 10C14 8.89543 14.8954 8 16 8H18C19.1046 8 20 8.89543 20 10V22C20 23.1046 19.1046 24 18 24H16C14.8954 24 14 23.1046 14 22V10Z" fill="black"/>
-        <path d="M22 14C22 12.8954 22.8954 12 24 12H26C27.1046 12 28 12.8954 28 14V18C28 19.1046 27.1046 20 26 20H24C22.8954 20 22 19.1046 22 18V14Z" fill="black"/>
-      </svg>
-      <span className="ml-2 font-semibold text-gray-900">NurseAI Academy</span>
+      <img 
+        src="https://img1.wsimg.com/isteam/ip/bd25398c-5bc5-4a04-b529-d558df7fc5b8/Logo%20ProntoTech%20Ai.png/:/rs=w:120,h:80,cg:true,m/cr=w:120,h:80/qt=q:95" 
+        alt="ProntoTech AI Logo" 
+        className="h-8 w-auto"
+      />
+      <span className="ml-2 font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600">ProntoTech AI</span>
     </div>
   );
 }
@@ -69,7 +69,7 @@ export default function Signup() {
       {/* Header */}
       <header className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
         <Link to="/">
-          <NurseAILogo size={28} />
+          <ProntoTechLogo />
         </Link>
         <div className="flex items-center space-x-4">
           <button className="flex items-center text-gray-600 hover:text-gray-900">
@@ -97,7 +97,7 @@ export default function Signup() {
               Create your account
             </h1>
             <p className="text-gray-600">
-              Start your learning journey with NurseAI Academy
+              Start your learning journey with ProntoTech AI
             </p>
           </div>
 
@@ -253,7 +253,7 @@ export default function Signup() {
 
       {/* Footer */}
       <footer className="py-4 text-center text-sm text-gray-500 border-t border-gray-100">
-        <p>© 2024 NurseAI Academy. All rights reserved.</p>
+        <p>© 2024 ProntoTech AI. All rights reserved.</p>
       </footer>
     </div>
   );

@@ -81,7 +81,7 @@ export default function Dashboard() {
 
             {/* Upload Options */}
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8 max-w-5xl mx-auto">
-              <button 
+              <button
                 onClick={() => setActiveModal('upload')}
                 className="flex flex-col items-center p-6 border border-gray-200 rounded-2xl hover:border-gray-300 hover:shadow-md transition-all bg-white relative group"
               >
@@ -92,7 +92,7 @@ export default function Dashboard() {
                 <span className="font-semibold text-gray-900 text-sm">Upload</span>
                 <span className="text-xs text-gray-500 mt-1">Lab Results, Charts</span>
               </button>
-              <button 
+              <button
                 onClick={() => setActiveModal('link')}
                 className="flex flex-col items-center p-6 border border-gray-200 rounded-2xl hover:border-gray-300 hover:shadow-md transition-all bg-white group"
               >
@@ -102,7 +102,7 @@ export default function Dashboard() {
                 <span className="font-semibold text-gray-900 text-sm">Link</span>
                 <span className="text-xs text-gray-500 mt-1">Medical Journal, Research</span>
               </button>
-              <button 
+              <button
                 onClick={() => setActiveModal('paste')}
                 className="flex flex-col items-center p-6 border border-gray-200 rounded-2xl hover:border-gray-300 hover:shadow-md transition-all bg-white group"
               >
@@ -112,7 +112,7 @@ export default function Dashboard() {
                 <span className="font-semibold text-gray-900 text-sm">Paste</span>
                 <span className="text-xs text-gray-500 mt-1">Copied Text</span>
               </button>
-              <button 
+              <button
                 onClick={() => setActiveModal('record')}
                 className="flex flex-col items-center p-6 border border-gray-200 rounded-2xl hover:border-gray-300 hover:shadow-md transition-all bg-white group"
               >
@@ -122,7 +122,7 @@ export default function Dashboard() {
                 <span className="font-semibold text-gray-900 text-sm">Record</span>
                 <span className="text-xs text-gray-500 mt-1">Clinical Rounds</span>
               </button>
-              <button 
+              <button
                 onClick={() => setActiveModal('download')}
                 className="flex flex-col items-center p-6 border border-gray-200 rounded-2xl hover:border-gray-300 hover:shadow-md transition-all bg-white group"
               >
@@ -281,11 +281,10 @@ export default function Dashboard() {
                 <button
                   key={cat.id}
                   onClick={() => setSelectedCategory(cat.id)}
-                  className={`px-4 py-2 rounded-full text-sm transition-colors ${
-                    selectedCategory === cat.id
+                  className={`px-4 py-2 rounded-full text-sm transition-colors ${selectedCategory === cat.id
                       ? 'bg-black text-white'
                       : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'
-                  }`}
+                    }`}
                 >
                   {cat.name}
                 </button>
@@ -325,19 +324,19 @@ export default function Dashboard() {
           <div className="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl animate-in zoom-in-95 duration-200">
             {/* Modal Header Image */}
             <div className="h-32 bg-gray-900 relative">
-              <img 
+              <img
                 src={
                   activeModal === 'upload' ? 'https://images.unsplash.com/photo-1576091160550-217359f42f8c?auto=format&fit=crop&q=80&w=1000' :
-                  activeModal === 'link' ? 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=1000' :
-                  activeModal === 'paste' ? 'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=1000' :
-                  activeModal === 'record' ? 'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&q=80&w=1000' :
-                  'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&q=80&w=1000'
-                } 
+                    activeModal === 'link' ? 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=1000' :
+                      activeModal === 'paste' ? 'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=1000' :
+                        activeModal === 'record' ? 'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&q=80&w=1000' :
+                          'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&q=80&w=1000'
+                }
                 className="w-full h-full object-cover opacity-60"
                 alt=""
               />
               <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent" />
-              <button 
+              <button
                 onClick={() => setActiveModal(null)}
                 className="absolute top-4 right-4 p-2 bg-white/20 hover:bg-white/40 rounded-full transition-colors backdrop-blur-md"
               >
@@ -373,8 +372,8 @@ export default function Dashboard() {
                     <p className="text-sm text-gray-600">Import research data or medical journal articles via URL.</p>
                     <div className="relative">
                       <Link2 className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                      <input 
-                        placeholder="https://pubmed.ncbi.nlm.nih.gov/..." 
+                      <input
+                        placeholder="https://pubmed.ncbi.nlm.nih.gov/..."
                         className="w-full pl-12 pr-4 py-4 rounded-2xl border border-gray-100 focus:border-gray-200 outline-none transition-colors"
                       />
                     </div>
@@ -384,8 +383,8 @@ export default function Dashboard() {
                 {activeModal === 'paste' && (
                   <div className="space-y-4">
                     <p className="text-sm text-gray-600">Analyze patient notes or clinical observations with AI.</p>
-                    <textarea 
-                      placeholder="Enter clinical notes here..." 
+                    <textarea
+                      placeholder="Enter clinical notes here..."
                       className="w-full h-40 p-5 bg-gray-50/50 border border-gray-100 rounded-3xl focus:border-gray-200 outline-none resize-none transition-colors"
                     />
                   </div>
@@ -421,8 +420,8 @@ export default function Dashboard() {
                   <Button variant="outline" className="flex-1 py-7 rounded-2xl border-gray-100" onClick={() => setActiveModal(null)} disabled={isProcessing}>
                     Cancel
                   </Button>
-                  <Button 
-                    className="flex-1 py-7 rounded-2xl bg-gray-900 hover:bg-black text-white shadow-xl" 
+                  <Button
+                    className="flex-1 py-7 rounded-2xl bg-gray-900 hover:bg-black text-white shadow-xl"
                     disabled={isProcessing}
                     onClick={() => {
                       setIsProcessing(true);

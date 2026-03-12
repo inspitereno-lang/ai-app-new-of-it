@@ -31,6 +31,8 @@ export default function Dashboard() {
   const [selectedCategory, setSelectedCategory] = useState('for-you');
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [localContents, setLocalContents] = useState(contents);
+  const [newItemTitle, setNewItemTitle] = useState('');
 
   // Redirect if not authenticated
   if (!isAuthenticated) {
@@ -39,14 +41,14 @@ export default function Dashboard() {
   }
 
   const userName = user?.name || 'User';
-  const recentContents = contents.slice(0, 6);
-  const exploreContents = contents.slice(0, 9);
+  const recentContents = localContents.slice(0, 6);
+  const exploreContents = localContents.slice(0, 9);
 
   // Calculate stats
-  const totalContents = contents.length;
-  const completedContents = contents.filter(c => c.progress === 100).length;
-  const inProgressContents = contents.filter(c => c.progress > 0 && c.progress < 100).length;
-  const totalProgress = Math.round(contents.reduce((acc, c) => acc + c.progress, 0) / contents.length);
+  const totalContents = localContents.length;
+  const completedContents = localContents.filter(c => c.progress === 100).length;
+  const inProgressContents = localContents.filter(c => c.progress > 0 && c.progress < 100).length;
+  const totalProgress = Math.round(localContents.reduce((acc, c) => acc + c.progress, 0) / localContents.length);
 
   return (
     <Layout>
@@ -57,11 +59,11 @@ export default function Dashboard() {
             <span className="text-sm text-gray-500">Untitled Space (0)</span>
           </div>
           <div className="flex items-center space-x-3">
-            <Button variant="outline" size="sm" className="text-gray-600 border-gray-300">
+            <Button variant="outline" size="sm" className="text-gray-600 border-gray-300" onClick={() => setActiveModal('new-exam')}>
               <Wand2 className="w-4 h-4 mr-2" />
               New Exam
             </Button>
-            <Button size="sm" className="bg-black text-white hover:bg-gray-800">
+            <Button size="sm" className="bg-black text-white hover:bg-gray-800" onClick={() => setActiveModal('add-course')}>
               <Plus className="w-4 h-4 mr-2" />
               Add Course
             </Button>
@@ -135,7 +137,10 @@ export default function Dashboard() {
             </div>
 
             {/* Learn Anything Button */}
-            <button className="inline-flex items-center px-6 py-3 bg-gray-100 rounded-full text-gray-600 hover:bg-gray-200 transition-colors">
+            <button 
+              onClick={() => setActiveModal('ai-tutor')}
+              className="inline-flex items-center px-6 py-3 bg-gray-100 rounded-full text-gray-600 hover:bg-gray-200 transition-colors"
+            >
               <MessageSquare className="w-5 h-5 mr-2" />
               Consult AI Tutor
             </button>
@@ -330,7 +335,9 @@ export default function Dashboard() {
                     activeModal === 'link' ? 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=1000' :
                       activeModal === 'paste' ? 'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=1000' :
                         activeModal === 'record' ? 'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&q=80&w=1000' :
-                          'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&q=80&w=1000'
+                          activeModal === 'new-exam' ? 'https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?auto=format&fit=crop&q=80&w=1000' :
+                            activeModal === 'add-course' ? 'https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&q=80&w=1000' :
+                              'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&q=80&w=1000'
                 }
                 className="w-full h-full object-cover opacity-60"
                 alt=""
@@ -352,8 +359,11 @@ export default function Dashboard() {
                   {activeModal === 'paste' && <FileText className="w-6 h-6 text-gray-900" />}
                   {activeModal === 'record' && <Mic className="w-6 h-6 text-gray-900" />}
                   {activeModal === 'download' && <Download className="w-6 h-6 text-gray-900" />}
+                  {activeModal === 'new-exam' && <Wand2 className="w-6 h-6 text-gray-900" />}
+                  {activeModal === 'add-course' && <Plus className="w-6 h-6 text-gray-900" />}
+                  {activeModal === 'ai-tutor' && <MessageSquare className="w-6 h-6 text-gray-900" />}
                 </div>
-                <h2 className="text-2xl font-bold capitalize">{activeModal} Content</h2>
+                <h2 className="text-2xl font-bold capitalize">{activeModal?.replace('-', ' ')} Content</h2>
               </div>
 
               <div className="space-y-6">
@@ -416,6 +426,31 @@ export default function Dashboard() {
                   </div>
                 )}
 
+                {(activeModal === 'new-exam' || activeModal === 'add-course') && (
+                  <div className="space-y-4">
+                    <p className="text-sm text-gray-600">Enter details to create your new {activeModal === 'new-exam' ? 'Exam' : 'Course'}.</p>
+                    <div className="relative">
+                      {activeModal === 'new-exam' ? <Wand2 className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" /> : <Plus className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />}
+                      <input
+                        placeholder={`Title of the ${activeModal === 'new-exam' ? 'Exam' : 'Course'}...`}
+                        value={newItemTitle}
+                        onChange={(e) => setNewItemTitle(e.target.value)}
+                        className="w-full pl-12 pr-4 py-4 rounded-2xl border border-gray-100 focus:border-gray-200 outline-none transition-colors"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {activeModal === 'ai-tutor' && (
+                  <div className="space-y-4">
+                    <p className="text-sm text-gray-600">How can I help you today?</p>
+                    <textarea
+                      placeholder="Ask the AI Tutor anything..."
+                      className="w-full h-40 p-5 bg-gray-50/50 border border-gray-100 rounded-3xl focus:border-gray-200 outline-none resize-none transition-colors"
+                    />
+                  </div>
+                )}
+
                 <div className="flex gap-4 pt-4">
                   <Button variant="outline" className="flex-1 py-7 rounded-2xl border-gray-100" onClick={() => setActiveModal(null)} disabled={isProcessing}>
                     Cancel
@@ -426,7 +461,25 @@ export default function Dashboard() {
                     onClick={() => {
                       setIsProcessing(true);
                       setTimeout(() => {
+                        if ((activeModal === 'new-exam' || activeModal === 'add-course') && newItemTitle.trim() !== '') {
+                          const newItem = {
+                            id: `custom-${Date.now()}`,
+                            title: newItemTitle,
+                            description: `Custom generated ${activeModal === 'new-exam' ? 'Exam' : 'Course'}.`,
+                            type: activeModal === 'new-exam' ? ('exam' as const) : ('course' as const),
+                            image: activeModal === 'new-exam' 
+                              ? 'https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?auto=format&fit=crop&q=80&w=1000' 
+                              : 'https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&q=80&w=1000',
+                            dateAdded: new Date().toISOString().split('T')[0],
+                            lastAccessed: new Date().toISOString().split('T')[0],
+                            spaceId: 'core-nursing',
+                            progress: 0,
+                            category: activeModal === 'new-exam' ? 'Exams' : 'Core Skills'
+                          };
+                          setLocalContents([newItem, ...localContents]);
+                        }
                         setIsProcessing(false);
+                        setNewItemTitle('');
                         setActiveModal(null);
                       }, 1800);
                     }}
@@ -434,7 +487,10 @@ export default function Dashboard() {
                     {isProcessing ? (
                       <Loader2 className="w-5 h-5 animate-spin mx-auto" />
                     ) : (
-                      activeModal === 'record' ? 'Save Recording' : 'Process with AI'
+                      activeModal === 'record' ? 'Save Recording' : 
+                      (activeModal === 'new-exam' || activeModal === 'add-course') ? `Create ${activeModal === 'new-exam' ? 'Exam' : 'Course'}` :
+                      activeModal === 'ai-tutor' ? 'Send Message' :
+                      'Process with AI'
                     )}
                   </Button>
                 </div>

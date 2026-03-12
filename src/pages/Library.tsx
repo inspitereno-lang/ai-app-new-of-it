@@ -77,11 +77,20 @@ function LibraryItem({ item, level = 0 }: LibraryItemProps) {
 export default function Library() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('list');
   const [searchQuery, setSearchQuery] = useState('');
+  const [filter, setFilter] = useState<'all' | 'favorites' | 'recent' | 'completed'>('all');
 
-  const filteredContents = contents.filter(c => 
+  let filteredContents = contents.filter(c => 
     c.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     c.category.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  if (filter === 'favorites') {
+    filteredContents = filteredContents.filter(c => c.isFavorite);
+  } else if (filter === 'completed') {
+    filteredContents = filteredContents.filter(c => c.progress === 100);
+  } else if (filter === 'recent') {
+    filteredContents = [...filteredContents].sort((a, b) => new Date(b.lastAccessed).getTime() - new Date(a.lastAccessed).getTime());
+  }
 
   return (
     <Layout>
@@ -93,15 +102,27 @@ export default function Library() {
             <p className="text-sm text-gray-500">Organize and access all your nursing study materials</p>
           </div>
           <div className="flex items-center space-x-3">
-            <Button variant="outline" size="sm">
+            <Button 
+               variant={filter === 'favorites' ? 'default' : 'outline'} 
+               size="sm"
+               onClick={() => setFilter(filter === 'favorites' ? 'all' : 'favorites')}
+            >
               <Star className="w-4 h-4 mr-2" />
               Favorites
             </Button>
-            <Button variant="outline" size="sm">
+            <Button 
+               variant={filter === 'recent' ? 'default' : 'outline'} 
+               size="sm"
+               onClick={() => setFilter(filter === 'recent' ? 'all' : 'recent')}
+            >
               <Clock className="w-4 h-4 mr-2" />
               Recent
             </Button>
-            <Button variant="outline" size="sm">
+            <Button 
+               variant={filter === 'completed' ? 'default' : 'outline'} 
+               size="sm"
+               onClick={() => setFilter(filter === 'completed' ? 'all' : 'completed')}
+            >
               <CheckCircle className="w-4 h-4 mr-2" />
               Completed
             </Button>

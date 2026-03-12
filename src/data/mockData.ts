@@ -4,13 +4,14 @@ export interface Content {
   id: string;
   title: string;
   description: string;
-  type: 'pdf' | 'video' | 'audio' | 'link' | 'text';
+  type: 'pdf' | 'video' | 'audio' | 'link' | 'text' | 'exam' | 'course';
   image: string;
   dateAdded: string;
   lastAccessed: string;
   spaceId: string;
   progress: number;
   category: string;
+  isFavorite?: boolean;
 }
 
 export interface Space {
@@ -218,6 +219,31 @@ export const contents: Content[] = [
     spaceId: 'core-nursing',
     progress: 0,
     category: 'Surgical Care'
+  },
+  {
+    id: '13',
+    title: 'Midterm Assessment: Critical Care',
+    description: 'Test your knowledge on ICU predictive analytics and emergency protocols.',
+    type: 'exam',
+    image: 'https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?auto=format&fit=crop&q=80&w=1000',
+    dateAdded: '2024-03-25',
+    lastAccessed: '2024-03-25',
+    spaceId: 'crit-care',
+    progress: 0,
+    category: 'Exams'
+  },
+  {
+    id: '14',
+    title: 'Advanced Diagnostic Imaging Course',
+    description: 'Learn to interpret complex X-rays, MRIs, and CT scans using AI assistance.',
+    type: 'course',
+    image: 'https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&q=80&w=1000',
+    dateAdded: '2024-03-26',
+    lastAccessed: '2024-03-26',
+    spaceId: 'nursing-informatics',
+    progress: 0,
+    category: 'Core Skills',
+    isFavorite: true
   }
 ];
 
@@ -315,5 +341,10 @@ export const testimonials = [
     quote: "As a nursing student, the VR simulation courses made me feel so much more confident before my first clinical rotation.",
     author: 'Emily Chen',
     role: 'BSN Student'
+  },
+  {
+    quote: "Integrating NurseAI into our hospital's training program has significantly improved clinical outcomes and reduced staff burnout.",
+    author: 'Dr. Sarah Thompson',
+    role: 'Chief Nursing Officer, MetroHealth Systems'
   }
 ];

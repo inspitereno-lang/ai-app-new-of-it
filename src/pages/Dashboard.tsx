@@ -59,7 +59,7 @@ export default function Dashboard() {
             <span className="text-xs sm:text-sm text-gray-500 truncate max-w-[120px] sm:max-w-none">Untitled Space (0)</span>
           </div>
           <div className="flex items-center space-x-2 sm:space-x-3">
-            <Button variant="outline" size="sm" className="h-8 text-[10px] sm:text-sm text-gray-600 border-gray-300 px-2 sm:px-3" onClick={() => setActiveModal('new-exam')}>
+            <Button variant="outline" size="sm" className="h-8 text-[10px] sm:text-sm text-gray-600 border-gray-300 px-2 sm:px-3" onClick={() => navigate('/exams')}>
               <Wand2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
               <span className="hidden xs:inline">New Exam</span>
               <span className="xs:hidden">Exam</span>

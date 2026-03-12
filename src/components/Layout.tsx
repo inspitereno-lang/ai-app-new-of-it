@@ -13,7 +13,8 @@ import {
   ChevronRight,
   Library,
   X,
-  Mail
+  Mail,
+  ClipboardCheck
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { spaces } from '@/data/mockData';
@@ -62,6 +63,7 @@ function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
   const mainMenuItems = [
     { id: 'add', icon: <Plus className="w-4 h-4" />, label: 'Add course', action: () => navigate('/dashboard') },
     { id: 'history', icon: <Clock className="w-4 h-4" />, label: 'History', path: '/history' },
+    { id: 'exams', icon: <ClipboardCheck className="w-4 h-4" />, label: 'Exams', path: '/exams' },
   ];
 
   const helpItems = [

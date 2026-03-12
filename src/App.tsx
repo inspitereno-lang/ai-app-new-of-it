@@ -12,6 +12,11 @@ import QuickGuide from './pages/QuickGuide';
 import SpaceDetail from './pages/SpaceDetail';
 import ContentDetail from './pages/ContentDetail';
 import Contact from './pages/Contact';
+import ExamList from './pages/ExamList';
+import ExamConfig from './pages/ExamConfig';
+import ExamTaking from './pages/ExamTaking';
+import ExamResults from './pages/ExamResults';
+import ExamReview from './pages/ExamReview';
 import { AuthProvider } from './context/AuthContext';
 import './App.css';
 
@@ -33,6 +38,11 @@ function App() {
           <Route path="/help" element={<HelpTools />} />
           <Route path="/feedback" element={<Feedback />} />
           <Route path="/guide" element={<QuickGuide />} />
+          <Route path="/exams" element={<ExamList />} />
+          <Route path="/exam/config" element={<ExamConfig />} />
+          <Route path="/exam/:examId/take" element={<ExamTaking />} />
+          <Route path="/exam/:examId/results/:attemptId" element={<ExamResults />} />
+          <Route path="/exam/:examId/review/:attemptId" element={<ExamReview />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>

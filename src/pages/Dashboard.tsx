@@ -21,6 +21,7 @@ import {
   Download
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { useAuth } from '@/context/AuthContext';
 import Layout from '@/components/Layout';
 import { spaces, contents, exploreCategories, historyData } from '@/data/mockData';
@@ -33,6 +34,7 @@ export default function Dashboard() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [localContents, setLocalContents] = useState(contents);
   const [newItemTitle, setNewItemTitle] = useState('');
+  const [showAiSearch, setShowAiSearch] = useState(false);
 
   // Redirect if not authenticated
   if (!isAuthenticated) {
@@ -138,14 +140,47 @@ export default function Dashboard() {
               </button>
             </div>
 
-            {/* Learn Anything Button */}
-            <button 
-              onClick={() => setActiveModal('ai-tutor')}
-              className="inline-flex items-center px-4 sm:px-6 py-2.5 sm:py-3 bg-gray-100 rounded-full text-gray-600 hover:bg-gray-200 transition-colors text-sm sm:text-base"
-            >
-              <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-              Consult AI Tutor
-            </button>
+            {/* Learn Anything Button / AI Search Bar */}
+            {showAiSearch ? (
+              <div className="max-w-xl mx-auto relative group animate-in slide-in-from-bottom-2 fade-in duration-300">
+                <div className="absolute left-4 top-1/2 -translate-y-1/2">
+                  <MessageSquare className="w-5 h-5 text-gray-400 group-focus-within:text-gray-900 transition-colors" />
+                </div>
+                <Input 
+                  autoFocus
+                  placeholder="Consult your clinical AI tutor..."
+                  className="pl-12 pr-12 py-7 rounded-2xl border-gray-200 focus:ring-2 focus:ring-black/5 text-base shadow-sm"
+                  onBlur={(e) => {
+                    // Only close if it's empty
+                    if (!e.target.value) setShowAiSearch(false);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Escape') setShowAiSearch(false);
+                    if (e.key === 'Enter') {
+                      setActiveModal('ai-tutor');
+                      setShowAiSearch(false);
+                    }
+                  }}
+                />
+                <button 
+                  onClick={() => {
+                    setActiveModal('ai-tutor');
+                    setShowAiSearch(false);
+                  }}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-gray-600 text-white rounded-xl flex items-center justify-center hover:bg-black transition-colors"
+                >
+                  <ArrowRight className="w-5 h-5" />
+                </button>
+              </div>
+            ) : (
+              <button 
+                onClick={() => setShowAiSearch(true)}
+                className="inline-flex items-center px-4 sm:px-6 py-2.5 sm:py-3 bg-gray-100 rounded-full text-gray-600 hover:bg-gray-200 transition-colors text-sm sm:text-base"
+              >
+                <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                Consult AI Tutor
+              </button>
+            )}
           </div>
 
           {/* Stats Section */}

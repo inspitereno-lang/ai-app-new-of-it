@@ -78,6 +78,7 @@ export default function Library() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('list');
   const [searchQuery, setSearchQuery] = useState('');
   const [filter, setFilter] = useState<'all' | 'favorites' | 'recent' | 'completed'>('all');
+  const [showMobileFolders, setShowMobileFolders] = useState(false);
 
   let filteredContents = contents.filter(c => 
     c.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -96,12 +97,12 @@ export default function Library() {
     <Layout>
       <div className="bg-white min-h-screen">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between px-4 sm:px-6 py-4 border-b border-gray-100 gap-4">
           <div>
-            <h1 className="text-xl font-semibold text-gray-900">Clinical Library</h1>
-            <p className="text-sm text-gray-500">Organize and access all your nursing study materials</p>
+            <h1 className="text-lg sm:text-xl font-semibold text-gray-900">Clinical Library</h1>
+            <p className="text-xs sm:text-sm text-gray-500">Organize and access all your nursing study materials</p>
           </div>
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2 overflow-x-auto pb-2 sm:pb-0 no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
             <Button 
                variant={filter === 'favorites' ? 'default' : 'outline'} 
                size="sm"
@@ -129,35 +130,51 @@ export default function Library() {
           </div>
         </div>
 
-        <div className="flex">
+        <div className="flex flex-col lg:flex-row min-h-screen">
+          {/* Mobile Folders Toggle */}
+          <div className="lg:hidden px-4 py-3 border-b border-gray-100 bg-gray-50/50">
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="w-full justify-between"
+              onClick={() => setShowMobileFolders(!showMobileFolders)}
+            >
+              <div className="flex items-center">
+                <Folder className="w-4 h-4 mr-2 text-blue-500" />
+                <span>Browse Collections</span>
+              </div>
+              {showMobileFolders ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
+            </Button>
+          </div>
+
           {/* Sidebar - Folder Structure */}
-          <div className="w-72 border-r border-gray-200 min-h-[calc(100vh-140px)] p-4">
-            <h2 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-4">Collections</h2>
+          <div className={`${showMobileFolders ? 'block' : 'hidden'} lg:block w-full lg:w-72 border-r border-gray-200 p-4 bg-white lg:bg-transparent`}>
+            <h2 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-4 px-3">Collections</h2>
             {libraryData.map((item) => (
               <LibraryItem key={item.id} item={item} />
             ))}
           </div>
 
           {/* Main Content */}
-          <div className="flex-1 p-6">
+          <div className="flex-1 p-4 sm:p-6 min-w-0">
             {/* Toolbar */}
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center space-x-4 flex-1 max-w-xl">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
+              <div className="flex items-center space-x-2 sm:space-x-4 flex-1">
                 <div className="relative flex-1">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                   <Input
-                    placeholder="Search your library..."
+                    placeholder="Search library..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-10"
+                    className="pl-9 h-9 text-sm"
                   />
                 </div>
-                <Button variant="outline" size="sm">
-                  <Filter className="w-4 h-4 mr-2" />
-                  Filter
+                <Button variant="outline" size="sm" className="h-9 px-2 sm:px-3">
+                  <Filter className="w-4 h-4 sm:mr-2" />
+                  <span className="hidden xs:inline">Filter</span>
                 </Button>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center justify-end space-x-1">
                 <button
                   onClick={() => setViewMode('grid')}
                   className={`p-2 rounded-lg transition-colors ${viewMode === 'grid' ? 'bg-gray-100' : 'hover:bg-gray-100'}`}
@@ -212,11 +229,11 @@ export default function Library() {
                       <p className="text-sm font-medium text-gray-900">{content.title}</p>
                       <p className="text-xs text-gray-500">{content.category} • {content.type}</p>
                     </div>
-                    <div className="w-32 mr-4">
+                    <div className="hidden xs:block w-24 sm:w-32 mr-4">
                       <div className="w-full bg-gray-200 rounded-full h-2">
                         <div className="bg-black rounded-full h-2" style={{ width: `${content.progress}%` }} />
                       </div>
-                      <p className="text-xs text-gray-400 mt-1 text-right">{content.progress}%</p>
+                      <p className="text-[10px] text-gray-400 mt-1 text-right">{content.progress}%</p>
                     </div>
                     <button className="p-2 hover:bg-gray-200 rounded-lg">
                       <MoreVertical className="w-4 h-4 text-gray-400" />

@@ -63,46 +63,47 @@ export default function SpaceDetail() {
     <Layout>
       <div className="bg-white min-h-screen">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-          <div className="flex items-center">
-            <Link to="/spaces" className="mr-4 p-2 hover:bg-gray-100 rounded-lg transition-colors">
-              <ArrowLeft className="w-5 h-5 text-gray-600" />
+        <div className="flex items-center justify-between px-4 sm:px-6 py-4 border-b border-gray-100">
+          <div className="flex items-center min-w-0">
+            <Link to="/spaces" className="mr-2 sm:mr-4 p-1.5 sm:p-2 hover:bg-gray-100 rounded-lg transition-colors flex-shrink-0">
+              <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" />
             </Link>
-            <div className={`w-10 h-10 ${space.color} rounded-xl flex items-center justify-center mr-4`}>
-              <FolderOpen className="w-5 h-5 text-white" />
+            <div className={`w-8 h-8 sm:w-10 sm:h-10 ${space.color} rounded-lg sm:rounded-xl flex items-center justify-center mr-2 sm:mr-4 flex-shrink-0`}>
+              <FolderOpen className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             </div>
-            <div>
-              <h1 className="text-xl font-semibold text-gray-900">{space.name}</h1>
-              <p className="text-sm text-gray-500">{space.description}</p>
+            <div className="min-w-0">
+              <h1 className="text-base sm:text-xl font-semibold text-gray-900 truncate">{space.name}</h1>
+              <p className="text-[10px] sm:text-sm text-gray-500 truncate">{space.description}</p>
             </div>
           </div>
-          <div className="flex items-center space-x-3">
-            <Button variant="outline" size="sm" className="hidden sm:flex">
-              <Wand2 className="w-4 h-4 mr-2" />
-              New Exam
+          <div className="flex items-center space-x-2 sm:space-x-3">
+            <Button variant="outline" size="sm" className="hidden xs:flex h-8 text-xs sm:text-sm px-2 sm:px-3">
+              <Wand2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 sm:mr-2" />
+              <span className="hidden sm:inline">New Exam</span>
             </Button>
-            <Button size="sm" className="bg-gray-700 hover:bg-gray-800 text-white">
-              <Plus className="w-4 h-4 mr-2" />
-              Add Course
+            <Button size="sm" className="bg-gray-700 hover:bg-gray-800 text-white h-8 text-xs sm:text-sm px-2 sm:px-3">
+              <Plus className="w-3.5 h-3.5 sm:w-4 sm:h-4 sm:mr-2" />
+              <span className="hidden sm:inline">Add Course</span>
+              <span className="sm:hidden">Add</span>
             </Button>
             <button 
               onClick={() => setShowSettings(!showSettings)}
-              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              className="p-1.5 sm:p-2 hover:bg-gray-100 rounded-lg transition-colors"
             >
-              <MoreHorizontal className="w-5 h-5 text-gray-500" />
+              <MoreHorizontal className="w-4 h-4 sm:w-5 sm:h-5 text-gray-500" />
             </button>
           </div>
         </div>
 
-        <div className="max-w-6xl mx-auto px-6 py-6">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6">
           {/* Hero Action Section */}
-          <div className="mb-12">
-            <div className="bg-white border-2 border-gray-100 rounded-3xl p-8 md:p-12 shadow-sm">
-              <div className="text-center mb-10">
-                <h2 className="text-4xl font-semibold text-gray-900 mb-2">
+          <div className="mb-10">
+            <div className="bg-white border sm:border-2 border-gray-100 rounded-2xl sm:rounded-3xl p-6 sm:p-12 shadow-sm">
+              <div className="text-center mb-8 sm:mb-10">
+                <h2 className="text-2xl sm:text-4xl font-semibold text-gray-900 mb-2 px-2">
                   Ready for clinical rounds, {userName}?
                 </h2>
-                <p className="text-gray-500">How would you like to advance your knowledge today?</p>
+                <p className="text-sm sm:text-base text-gray-500">How would you like to advance your knowledge today?</p>
               </div>
 
               <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8 max-w-5xl mx-auto">

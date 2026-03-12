@@ -125,12 +125,12 @@ function HeroSection() {
         </div>
 
         {/* Main Heading */}
-        <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold text-gray-900 mb-6 tracking-tight">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-semibold text-gray-900 mb-6 tracking-tight px-4">
           Master Nursing with AI
         </h1>
 
         {/* Subheading */}
-        <p className="text-xl md:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto">
+        <p className="text-lg md:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto px-4">
           The specialized AI platform for nurses to master advanced clinical skills, pass certifications, and stay updated with medical informatics.
         </p>
 
@@ -173,11 +173,11 @@ function HeroSection() {
                 <div className="w-3 h-3 rounded-full bg-green-400"></div>
               </div>
             </div>
-            <div className="p-8">
-              <div className="text-center mb-8">
-                <h3 className="text-2xl font-semibold text-gray-900 mb-2">What clinical skill would you like to master?</h3>
+            <div className="p-4 sm:p-8">
+              <div className="text-center mb-6 sm:mb-8">
+                <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-2 px-2">What clinical skill would you like to master?</h3>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 max-w-3xl mx-auto">
                 <div className="flex flex-col items-center p-6 border border-gray-200 rounded-xl hover:border-gray-300 hover:shadow-md transition-all cursor-pointer">
                   <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-3">
                     <Upload className="w-6 h-6" />

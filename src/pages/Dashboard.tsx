@@ -54,32 +54,34 @@ export default function Dashboard() {
     <Layout>
       <div className="bg-white min-h-screen">
         {/* Top Bar */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 bg-white">
-          <div className="flex items-center space-x-4">
-            <span className="text-sm text-gray-500">Untitled Space (0)</span>
+        <div className="flex items-center justify-between px-4 sm:px-6 py-4 border-b border-gray-100 bg-white sticky top-0 z-10 lg:static">
+          <div className="flex items-center space-x-2 sm:space-x-4 min-w-0">
+            <span className="text-xs sm:text-sm text-gray-500 truncate max-w-[120px] sm:max-w-none">Untitled Space (0)</span>
           </div>
-          <div className="flex items-center space-x-3">
-            <Button variant="outline" size="sm" className="text-gray-600 border-gray-300" onClick={() => setActiveModal('new-exam')}>
-              <Wand2 className="w-4 h-4 mr-2" />
-              New Exam
+          <div className="flex items-center space-x-2 sm:space-x-3">
+            <Button variant="outline" size="sm" className="h-8 text-[10px] sm:text-sm text-gray-600 border-gray-300 px-2 sm:px-3" onClick={() => setActiveModal('new-exam')}>
+              <Wand2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              <span className="hidden xs:inline">New Exam</span>
+              <span className="xs:hidden">Exam</span>
             </Button>
-            <Button size="sm" className="bg-black text-white hover:bg-gray-800" onClick={() => setActiveModal('add-course')}>
-              <Plus className="w-4 h-4 mr-2" />
-              Add Course
+            <Button size="sm" className="h-8 text-[10px] sm:text-sm bg-black text-white hover:bg-gray-800 px-2 sm:px-3" onClick={() => setActiveModal('add-course')}>
+              <Plus className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              <span className="hidden xs:inline">Add Course</span>
+              <span className="xs:hidden">Course</span>
             </Button>
-            <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-              <MoreHorizontal className="w-5 h-5 text-gray-500" />
+            <button className="p-1.5 sm:p-2 hover:bg-gray-100 rounded-lg transition-colors">
+              <MoreHorizontal className="w-4 h-4 sm:w-5 sm:h-5 text-gray-500" />
             </button>
           </div>
         </div>
 
-        <div className="max-w-6xl mx-auto px-6 py-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
           {/* Welcome Section */}
-          <div className="text-center mb-10">
-            <h1 className="text-3xl font-semibold text-gray-900 mb-2">
+          <div className="text-center mb-8 sm:mb-10">
+            <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2 px-2">
               Ready for clinical rounds, {userName}?
             </h1>
-            <p className="text-gray-500 mb-8">Maintain clinical excellence with AI-powered insights</p>
+            <p className="text-sm sm:text-base text-gray-500 mb-6 sm:mb-8">Maintain clinical excellence with AI-powered insights</p>
 
             {/* Upload Options */}
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8 max-w-5xl mx-auto">
@@ -139,9 +141,9 @@ export default function Dashboard() {
             {/* Learn Anything Button */}
             <button 
               onClick={() => setActiveModal('ai-tutor')}
-              className="inline-flex items-center px-6 py-3 bg-gray-100 rounded-full text-gray-600 hover:bg-gray-200 transition-colors"
+              className="inline-flex items-center px-4 sm:px-6 py-2.5 sm:py-3 bg-gray-100 rounded-full text-gray-600 hover:bg-gray-200 transition-colors text-sm sm:text-base"
             >
-              <MessageSquare className="w-5 h-5 mr-2" />
+              <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
               Consult AI Tutor
             </button>
           </div>

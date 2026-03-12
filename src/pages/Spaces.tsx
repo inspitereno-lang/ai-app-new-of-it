@@ -32,28 +32,29 @@ export default function Spaces() {
     <Layout>
       <div className="bg-white min-h-screen">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-          <div>
-            <h1 className="text-xl font-semibold text-gray-900">Spaces</h1>
-            <p className="text-sm text-gray-500">Organize your learning materials into spaces</p>
+        <div className="flex items-center justify-between px-4 sm:px-6 py-4 border-b border-gray-100">
+          <div className="min-w-0">
+            <h1 className="text-lg sm:text-xl font-semibold text-gray-900 truncate">Spaces</h1>
+            <p className="text-xs sm:text-sm text-gray-500 truncate">Organize your learning materials</p>
           </div>
-          <Button onClick={() => setShowCreateModal(true)}>
-            <Plus className="w-4 h-4 mr-2" />
-            Create Space
+          <Button size="sm" onClick={() => setShowCreateModal(true)} className="flex-shrink-0">
+            <Plus className="w-4 h-4 sm:mr-2" />
+            <span className="hidden xs:inline">Create Space</span>
+            <span className="xs:hidden">Space</span>
           </Button>
         </div>
 
-        <div className="max-w-6xl mx-auto px-6 py-6">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6">
           {/* Toolbar */}
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center space-x-4 flex-1 max-w-xl">
+          <div className="flex items-center justify-between mb-6 gap-4">
+            <div className="flex items-center space-x-4 flex-1">
               <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <Input
                   placeholder="Search spaces..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10"
+                  className="pl-9 h-9 text-sm"
                 />
               </div>
             </div>

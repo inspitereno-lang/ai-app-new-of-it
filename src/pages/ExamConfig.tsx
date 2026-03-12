@@ -160,7 +160,7 @@ export default function ExamConfig() {
                   <Target className="w-4 h-4 mr-2 text-gray-400" />
                   Number of Questions
                 </label>
-                <div className="flex items-center space-x-3">
+                <div className="flex flex-wrap gap-2 sm:gap-3">
                   {[5, 10, 15, 20, 25].map(n => (
                     <button
                       key={n}
@@ -183,7 +183,7 @@ export default function ExamConfig() {
                   <Clock className="w-4 h-4 mr-2 text-gray-400" />
                   Time Limit (minutes)
                 </label>
-                <div className="flex items-center space-x-3">
+                <div className="flex flex-wrap gap-2 sm:gap-3">
                   {[15, 20, 25, 30, 45, 60].map(t => (
                     <button
                       key={t}
@@ -231,7 +231,7 @@ export default function ExamConfig() {
           </div>
 
           {/* Actions */}
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-8">
             <Button
               variant="outline"
               className="flex-1 py-6 rounded-2xl border-gray-200"

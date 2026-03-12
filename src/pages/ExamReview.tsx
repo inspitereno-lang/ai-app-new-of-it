@@ -203,9 +203,9 @@ export default function ExamReview() {
 
                       {/* Source */}
                       {q.source && (
-                        <div className="flex items-center space-x-2 text-xs text-gray-400">
-                          <FileText className="w-3.5 h-3.5" />
-                          <span>{q.source}</span>
+                        <div className="flex flex-wrap items-center gap-2 text-xs text-gray-400">
+                          <FileText className="w-3.5 h-3.5 flex-shrink-0" />
+                          <span className="truncate">{q.source}</span>
                           {q.sourcePage && <span>• {q.sourcePage}</span>}
                         </div>
                       )}
@@ -232,7 +232,7 @@ export default function ExamReview() {
           )}
 
           {/* Back Button */}
-          <div className="mt-8 flex gap-3">
+          <div className="mt-8 flex flex-col sm:flex-row gap-3">
             <Button
               variant="outline"
               className="flex-1 py-5 rounded-2xl"
@@ -272,7 +272,7 @@ export default function ExamReview() {
               placeholder="Ask a follow-up question..."
               className="w-full h-20 p-3 border border-gray-200 rounded-xl text-sm outline-none focus:border-gray-400 resize-none mb-3"
             />
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <Button variant="outline" className="flex-1 rounded-xl" onClick={() => setShowAiModal(null)}>Close</Button>
               <Button className="flex-1 rounded-xl bg-gray-900 text-white">Ask AI</Button>
             </div>

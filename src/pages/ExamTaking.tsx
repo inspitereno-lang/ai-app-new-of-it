@@ -113,7 +113,7 @@ export default function ExamTaking() {
 
       case 'true_false':
         return (
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             {['True', 'False'].map(opt => (
               <button
                 key={opt}
@@ -226,8 +226,8 @@ export default function ExamTaking() {
         <div className="flex-1 overflow-y-auto">
           <div className="max-w-2xl mx-auto px-4 sm:px-8 py-8">
             {/* Question Header */}
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center space-x-2">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-0 mb-6">
+              <div className="flex flex-wrap items-center gap-2">
                 <span className="text-xs font-bold text-gray-400 uppercase">Question {currentIndex + 1} of {questions.length}</span>
                 <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase ${
                   currentQuestion.difficulty === 'easy' ? 'bg-green-100 text-green-700' :
@@ -376,7 +376,7 @@ export default function ExamTaking() {
                 </div>
               </div>
 
-              <div className="flex gap-3">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <Button
                   variant="outline"
                   className="flex-1 py-5 rounded-xl"

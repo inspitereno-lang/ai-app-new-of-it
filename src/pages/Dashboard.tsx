@@ -405,12 +405,25 @@ export default function Dashboard() {
 
               <div className="space-y-6">
                 {activeModal === 'upload' && (
-                  <div className="border-2 border-dashed border-gray-100 rounded-3xl p-10 text-center hover:border-gray-200 transition-colors cursor-pointer bg-gray-50/50">
-                    <div className="w-16 h-16 bg-white shadow-sm rounded-2xl flex items-center justify-center mx-auto mb-4">
-                      <Upload className="w-8 h-8 text-gray-400" />
+                  <div className="space-y-6">
+                    <div className="relative group overflow-hidden rounded-3xl border border-gray-100 shadow-xl">
+                      <img 
+                        src="/images/clinical_upload.png" 
+                        alt="Clinical Data Preview" 
+                        className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-6">
+                        <div className="flex items-center space-x-3 text-white">
+                          <div className="p-2 bg-white/20 rounded-xl backdrop-blur-md">
+                            <Plus className="w-6 h-6" />
+                          </div>
+                          <div>
+                            <p className="font-bold">Ready to Upload</p>
+                            <p className="text-xs text-white/80">Select your clinical files to begin analysis</p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <p className="font-semibold text-gray-900">Upload Clinical Data</p>
-                    <p className="text-sm text-gray-500 mt-1">PDF, Lab Reports, or Imaging</p>
                   </div>
                 )}
 
@@ -450,15 +463,22 @@ export default function Dashboard() {
                 )}
 
                 {activeModal === 'download' && (
-                  <div className="space-y-4">
-                    <p className="text-sm text-gray-600">Premium clinical resources for your offline study.</p>
-                    <div className="space-y-2">
-                      {['Emergency protocols.pdf', 'Clinical Cheat Sheet.png', 'Drug Dosage Guide.pdf'].map((item) => (
-                        <div key={item} className="p-4 bg-gray-50/50 border border-gray-100 rounded-2xl flex items-center justify-between group hover:bg-white hover:shadow-sm transition-all cursor-pointer">
-                          <span className="text-sm font-medium text-gray-700">{item}</span>
-                          <Download className="w-4 h-4 text-gray-400 group-hover:text-gray-900" />
+                  <div className="space-y-6">
+                    <div className="relative group overflow-hidden rounded-3xl border border-gray-100 shadow-xl">
+                      <img 
+                        src="/images/clinical_resources.png" 
+                        alt="Clinical Resources" 
+                        className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6">
+                        <div className="flex items-center space-x-3 text-white mb-2">
+                          <div className="p-2 bg-blue-500/20 rounded-xl backdrop-blur-md">
+                             <Download className="w-6 h-6 text-white" />
+                          </div>
+                          <h3 className="font-bold text-xl">Premium Library</h3>
                         </div>
-                      ))}
+                        <p className="text-white/80 text-sm">Access and download your expert-vetted nursing protocols and study materials.</p>
+                      </div>
                     </div>
                   </div>
                 )}

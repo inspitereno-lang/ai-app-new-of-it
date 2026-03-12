@@ -15,7 +15,10 @@ import {
   CheckCircle,
   Sparkles,
   Mail,
-  MapPin
+  MapPin,
+  PlayCircle,
+  Video,
+  GraduationCap
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/context/AuthContext';
@@ -221,6 +224,92 @@ function HeroSection() {
   );
 }
 
+// AI Helping Section
+function AIHelpingSection() {
+  const navigate = useNavigate();
+
+  return (
+    <section className="py-24 bg-gray-50 overflow-hidden border-y border-gray-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full text-blue-700 text-sm font-semibold mb-6">
+            <Video className="w-4 h-4 mr-2" />
+            Interactive Video Learning
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
+            Learn directly from AI Video Instructors
+          </h2>
+          <p className="text-xl text-gray-600">
+            Our AI breaks down complex nursing topics through interactive video lessons. Watch, learn, and master your skills effortlessly within your courses.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8 mb-16">
+           <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition-shadow">
+              <div className="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                 <PlayCircle className="w-7 h-7 text-blue-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">On-Demand Lectures</h3>
+              <p className="text-gray-600">AI-generated video lessons tailored to your specific clinical questions and course material.</p>
+           </div>
+           
+           <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition-shadow">
+              <div className="w-14 h-14 bg-purple-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                 <GraduationCap className="w-7 h-7 text-purple-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">Expert Explanations</h3>
+              <p className="text-gray-600">Complex pharmacology and pathophysiology concepts visualized and explained simply.</p>
+           </div>
+
+           <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition-shadow">
+              <div className="w-14 h-14 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                 <Video className="w-7 h-7 text-green-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">Visual Case Studies</h3>
+              <p className="text-gray-600">Walk through patient scenarios with step-by-step video guidance from your AI tutor.</p>
+           </div>
+        </div>
+
+        <div className="max-w-4xl mx-auto">
+          <div className="relative rounded-2xl overflow-hidden shadow-xl border border-gray-200 aspect-video bg-gray-900 group">
+            <video 
+              autoPlay 
+              loop 
+              muted 
+              playsInline
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-102"
+            >
+              <source src="/Untitled design.webm" type="video/webm" />
+              Your browser does not support the video tag.
+            </video>
+            
+            {/* Simple Overlay */}
+            <div className="absolute inset-0 bg-black/20 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+               <div className="w-20 h-20 bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center cursor-pointer hover:bg-white/40 transition-colors">
+                  <PlayCircle className="w-10 h-10 text-white fill-white/20" />
+               </div>
+            </div>
+            
+            <div className="absolute bottom-4 left-4 bg-black/60 backdrop-blur-md text-white text-sm px-4 py-2 rounded-full flex items-center">
+              <span className="w-2 h-2 bg-red-500 rounded-full mr-2 animate-pulse"></span>
+              Live AI Tutor Session
+            </div>
+          </div>
+        </div>
+        
+        <div className="text-center mt-12">
+            <Button 
+              className="rounded-full px-8 py-6 text-lg bg-black text-white hover:bg-gray-800 transition-colors"
+              onClick={() => navigate('/login')}
+            >
+              Start Video Course
+            </Button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // Features Section
 function FeaturesSection() {
   const features = [
@@ -324,7 +413,7 @@ function FAQSection() {
   const faqs = [
     {
       question: 'What is NurseAI Academy?',
-      answer: 'NurseAI Academy is an AI-powered education platform specifically designed for nursing professionals. We help you master clinical concepts, prepare for certifications (NCLEX, specialty certs), and learn advanced nursing informatics through interactive notes, AI-generated quizzes, and clinical simulation guides.'
+      answer: 'NurseAI Academy is an AI-powered education platform specifically designed for nursing professionals. We help you master clinical concepts, prepare for certifications (NCLICK, specialty certs), and learn advanced nursing informatics through interactive notes, AI-generated quizzes, and clinical simulation guides.'
     },
     {
       question: 'How does NurseAI help me with certifications?',
@@ -553,6 +642,7 @@ export default function LandingPage() {
     <div className="min-h-screen bg-white">
       <Navbar />
       <HeroSection />
+      <AIHelpingSection />
       <FeaturesSection />
       <TestimonialsSection />
       <FAQSection />

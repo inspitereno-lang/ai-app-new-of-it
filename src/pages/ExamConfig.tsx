@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import {
-  ArrowLeft, Settings2, FileText, Clock, Target,
+  ArrowLeft, Settings2, Clock, Target,
   CheckSquare, Wand2, Upload, Loader2
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';

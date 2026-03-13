@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
-  Upload, 
-  Link2, 
-  Mic, 
   BookOpen, 
   Menu,
   X,
@@ -16,24 +13,21 @@ import {
   Sparkles,
   Mail,
   MapPin,
-  PlayCircle,
-  Video,
-  GraduationCap
+  PlayCircle
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/context/AuthContext';
-import { testimonials } from '@/data/mockData';
 
-// ProntoTech Logo Component
-function ProntoTechLogo() {
+// Branding Logo Component
+function NCLIPSLogo({ className = "h-12 w-auto" }: { className?: string }) {
   return (
     <div className="flex items-center">
       <img 
-        src="https://img1.wsimg.com/isteam/ip/bd25398c-5bc5-4a04-b529-d558df7fc5b8/Logo%20ProntoTech%20Ai.png/:/rs=w:120,h:80,cg:true,m/cr=w:120,h:80/qt=q:95" 
-        alt="ProntoTech AI Logo" 
-        className="h-8 w-auto"
+        src="/images/Screenshot 2026-03-13 at 1.35.34 PM.png" 
+        alt="NCLIPS Logo" 
+        className={`${className} object-contain`}
       />
-      <span className="ml-2 text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600">ProntoTech AI</span>
+      <span className="ml-3 text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 tracking-tight">NCLIPS</span>
     </div>
   );
 }
@@ -58,7 +52,7 @@ function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <ProntoTechLogo />
+            <NCLIPSLogo />
           </Link>
 
           {/* Desktop Navigation */}
@@ -128,13 +122,13 @@ function HeroSection() {
         </div>
 
         {/* Main Heading */}
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-semibold text-gray-900 mb-6 tracking-tight px-4">
-          Master Nursing with AI
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 tracking-tight px-4 leading-[1.1]">
+          Revolutionizing Nursing Education with Visual AI
         </h1>
 
         {/* Subheading */}
-        <p className="text-lg md:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto px-4">
-          The specialized AI platform for nurses to master advanced clinical skills, pass certifications, and stay updated with medical informatics.
+        <p className="text-lg md:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto px-4 leading-relaxed">
+          A specialized AI learning platform that enables nursing students to visualize complex medical concepts, develop advanced clinical skills, succeed in certification exams, and stay current with U.S. healthcare standards.
         </p>
 
         {/* CTA Buttons */}
@@ -176,44 +170,29 @@ function HeroSection() {
                 <div className="w-3 h-3 rounded-full bg-green-400"></div>
               </div>
             </div>
-            <div className="p-4 sm:p-8">
-              <div className="text-center mb-6 sm:mb-8">
-                <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-2 px-2">What clinical skill would you like to master?</h3>
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 max-w-3xl mx-auto">
-                <div className="flex flex-col items-center p-6 border border-gray-200 rounded-xl hover:border-gray-300 hover:shadow-md transition-all cursor-pointer">
-                  <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-3">
-                    <Upload className="w-6 h-6" />
-                  </div>
-                  <span className="font-medium text-gray-900">Upload</span>
-                  <span className="text-sm text-gray-500">Charts, Lab reports</span>
+            <div className="p-0 sm:p-0">
+              <div className="relative rounded-b-2xl overflow-hidden aspect-video bg-gray-900 group">
+                <video 
+                  autoPlay 
+                  loop 
+                  muted 
+                  playsInline
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-102"
+                >
+                  <source src="/Untitled design.webm" type="video/webm" />
+                  Your browser does not support the video tag.
+                </video>
+                
+                {/* Simple Overlay */}
+                <div className="absolute inset-0 bg-black/20 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                   <div className="w-20 h-20 bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center cursor-pointer hover:bg-white/40 transition-colors">
+                      <PlayCircle className="w-10 h-10 text-white fill-white/20" />
+                   </div>
                 </div>
-                <div className="flex flex-col items-center p-6 border border-gray-200 rounded-xl hover:border-gray-300 hover:shadow-md transition-all cursor-pointer">
-                  <div className="w-12 h-12 bg-green-50 text-green-600 rounded-xl flex items-center justify-center mb-3">
-                    <Link2 className="w-6 h-6" />
-                  </div>
-                  <span className="font-medium text-gray-900">Link</span>
-                  <span className="text-sm text-gray-500">Medical Journal, Research</span>
-                </div>
-                <div className="flex flex-col items-center p-6 border border-gray-200 rounded-xl hover:border-gray-300 hover:shadow-md transition-all cursor-pointer">
-                  <div className="w-12 h-12 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center mb-3">
-                    <MessageSquare className="w-6 h-6" />
-                  </div>
-                  <span className="font-medium text-gray-900">Paste</span>
-                  <span className="text-sm text-gray-500">Copied text</span>
-                </div>
-                <div className="flex flex-col items-center p-6 border border-gray-200 rounded-xl hover:border-gray-300 hover:shadow-md transition-all cursor-pointer">
-                  <div className="w-12 h-12 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center mb-3">
-                    <Mic className="w-6 h-6" />
-                  </div>
-                  <span className="font-medium text-gray-900">Record</span>
-                  <span className="text-sm text-gray-500">Clinical Rounds</span>
-                </div>
-              </div>
-              <div className="mt-8 flex justify-center">
-                <div className="bg-gray-100 rounded-full px-6 py-3 flex items-center space-x-2">
-                  <Sparkles className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600">Revolutionizing nursing care with AI</span>
+                
+                <div className="absolute bottom-4 left-4 bg-black/60 backdrop-blur-md text-white text-sm px-4 py-2 rounded-full flex items-center shadow-lg">
+                  <span className="w-2 h-2 bg-red-500 rounded-full mr-2 animate-pulse"></span>
+                  Live AI Tutor Session
                 </div>
               </div>
             </div>
@@ -224,86 +203,42 @@ function HeroSection() {
   );
 }
 
-// AI Helping Section
-function AIHelpingSection() {
-  const navigate = useNavigate();
-
+// NCLIPS About Section
+function NCLIPSAboutSection() {
   return (
-    <section className="py-24 bg-gray-50 overflow-hidden border-y border-gray-100">
+    <section className="py-24 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full text-blue-700 text-sm font-semibold mb-6">
-            <Video className="w-4 h-4 mr-2" />
-            Interactive Video Learning
-          </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
-            Learn directly from AI Video Instructors
-          </h2>
-          <p className="text-xl text-gray-600">
-            Our AI breaks down complex nursing topics through interactive video lessons. Watch, learn, and master your skills effortlessly within your courses.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
-           <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition-shadow">
-              <div className="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
-                 <PlayCircle className="w-7 h-7 text-blue-600" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">On-Demand Lectures</h3>
-              <p className="text-gray-600">AI-generated video lessons tailored to your specific clinical questions and course material.</p>
-           </div>
-           
-           <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition-shadow">
-              <div className="w-14 h-14 bg-purple-50 rounded-full flex items-center justify-center mx-auto mb-6">
-                 <GraduationCap className="w-7 h-7 text-purple-600" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Expert Explanations</h3>
-              <p className="text-gray-600">Complex pharmacology and pathophysiology concepts visualized and explained simply.</p>
-           </div>
-
-           <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition-shadow">
-              <div className="w-14 h-14 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
-                 <Video className="w-7 h-7 text-green-600" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Visual Case Studies</h3>
-              <p className="text-gray-600">Walk through patient scenarios with step-by-step video guidance from your AI tutor.</p>
-           </div>
-        </div>
-
-        <div className="max-w-4xl mx-auto">
-          <div className="relative rounded-2xl overflow-hidden shadow-xl border border-gray-200 aspect-video bg-gray-900 group">
-            <video 
-              autoPlay 
-              loop 
-              muted 
-              playsInline
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-102"
-            >
-              <source src="/Untitled design.webm" type="video/webm" />
-              Your browser does not support the video tag.
-            </video>
-            
-            {/* Simple Overlay */}
-            <div className="absolute inset-0 bg-black/20 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-               <div className="w-20 h-20 bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center cursor-pointer hover:bg-white/40 transition-colors">
-                  <PlayCircle className="w-10 h-10 text-white fill-white/20" />
-               </div>
-            </div>
-            
-            <div className="absolute bottom-4 left-4 bg-black/60 backdrop-blur-md text-white text-sm px-4 py-2 rounded-full flex items-center">
-              <span className="w-2 h-2 bg-red-500 rounded-full mr-2 animate-pulse"></span>
-              Live AI Tutor Session
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="relative order-2 lg:order-1">
+            <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl bg-black flex items-center justify-center p-0">
+              <video 
+                autoPlay 
+                loop 
+                muted 
+                playsInline
+                className="w-full h-full object-cover"
+              >
+                <source src="/WhatsApp Video 2026-03-13 at 12.22.02.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-3xl"></div>
             </div>
           </div>
-        </div>
-        
-        <div className="text-center mt-12">
-            <Button 
-              className="rounded-full px-8 py-6 text-lg bg-black text-white hover:bg-gray-800 transition-colors"
-              onClick={() => navigate('/login')}
-            >
-              Start Video Course
-            </Button>
+
+          <div className="order-1 lg:order-2">
+            <div className="inline-flex items-center px-4 py-2 bg-blue-50 rounded-full text-blue-600 text-sm font-semibold mb-6">
+              Visual AI Technology
+            </div>
+            <h2 className="text-4xl font-bold text-gray-900 mb-6 tracking-tight">
+              Visual AI for Nursing Excellence
+            </h2>
+            <p className="text-xl font-medium text-gray-700 mb-6">
+              NCLIPS for NCLEX helps nursing students master complex concepts through visual learning.
+            </p>
+            <p className="text-lg text-gray-600 leading-relaxed">
+              Our cutting-edge algorithm transforms complex, multifaceted medical topics into captivating AI-generated visual learning experiences. Students watch high-fidelity animations and dynamic visual explanations that bring anatomy, physiology, and clinical concepts to life in real time—making difficult material intuitive, engaging, and far easier to master.
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -369,32 +304,67 @@ function FeaturesSection() {
 
 // Testimonials Section
 function TestimonialsSection() {
+  const studentTestimonials = [
+    {
+      quote: "NCLIPS takes all the stress out of studying!",
+      author: "Emilia Gonzales",
+      role: "LPN Student"
+    },
+    {
+      quote: "This software has saved me from so much headache and frustration from long lectures and book reading, TutorAgent answers all my questions better than my instructor",
+      author: "Bryan Wu",
+      role: "RN Student"
+    },
+    {
+      quote: "Memorizing drug classes and interactions has never been easier!",
+      author: "Sheryl Winthrop",
+      role: "LPN Student"
+    },
+    {
+      quote: "No need to lug around 4 textbooks at once when I can simply enter the product key and learn faster than ever before, I ace all my classes without having to read for hours while not getting any meaningful help from my professor.",
+      author: "Anish Gupta",
+      role: "RN Student"
+    },
+    {
+      quote: "Learning with NCLIPS is as simple as watching reels or short videos. Their engaging AI-powered videos deliver essential concepts in a clear, concise format. Making complex information easy to understand and remember.",
+      author: "Nimmy Mathew",
+      role: "LPN Student"
+    },
+    {
+      quote: "Their AI tutor speaks my Filipino language! Since English isn’t my first language, whenever I have trouble understanding a topic, I simply ask it to explain in my language. It communicates fluently and clearly, making learning much easier. In fact, it can speak 57 different languages, helping students from diverse backgrounds learn comfortably.",
+      author: "Angelica",
+      role: "LPN Student"
+    }
+  ];
+
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-semibold text-gray-900 mb-4">
-            Trusted by nurses in top hospital systems
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">
+            Trusted by students throughout the US
           </h2>
           <p className="text-xl text-gray-600">
-            See how NurseAI Academy is transforming healthcare education.
+            Read how NCLIPS transforms healthcare education:
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {testimonials.map((testimonial, i) => (
-            <div key={i} className="bg-gray-50 rounded-2xl p-6 hover:shadow-md transition-shadow">
-              <div className="flex items-center mb-4">
-                {[...Array(5)].map((_, j) => (
-                  <Star key={j} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {studentTestimonials.map((testimonial, i) => (
+            <div key={i} className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col justify-between hover:shadow-md transition-shadow">
+              <div>
+                <div className="flex items-center mb-4">
+                  {[...Array(5)].map((_, j) => (
+                    <Star key={j} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                  ))}
+                </div>
+                <p className="text-gray-700 mb-6 leading-relaxed italic">"{testimonial.quote}"</p>
               </div>
-              <p className="text-gray-700 mb-6 leading-relaxed">"{testimonial.quote}"</p>
-              <div className="flex items-center">
-                <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-medium">
+              <div className="flex items-center border-t border-gray-50 pt-6">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-medium">
                   {testimonial.author[0]}
                 </div>
                 <div className="ml-3">
-                  <p className="font-medium text-gray-900">{testimonial.author}</p>
+                  <p className="font-bold text-gray-900">{testimonial.author}</p>
                   <p className="text-sm text-gray-500">{testimonial.role}</p>
                 </div>
               </div>
@@ -412,12 +382,12 @@ function FAQSection() {
 
   const faqs = [
     {
-      question: 'What is NurseAI Academy?',
-      answer: 'NurseAI Academy is an AI-powered education platform specifically designed for nursing professionals. We help you master clinical concepts, prepare for certifications (NCLICK, specialty certs), and learn advanced nursing informatics through interactive notes, AI-generated quizzes, and clinical simulation guides.'
+      question: 'What is NCLIPS?',
+      answer: 'NCLIPS is an AI-powered education platform specifically designed for nursing professionals. We help you master clinical concepts, prepare for certifications (NCLICK, specialty certs), and learn advanced nursing informatics through interactive notes, AI-generated quizzes, and clinical simulation guides.'
     },
     {
-      question: 'How does NurseAI help me with certifications?',
-      answer: 'NurseAI Academy creates personalized quizzes and practice tests focused on clinical scenarios and specialty exams. Our AI tutor explains complex medical concepts and pharmacological interactions using the latest evidence-based practice guidelines.'
+      question: 'How does NCLIPS help me with certifications?',
+      answer: 'NCLIPS creates personalized quizzes and practice tests focused on clinical scenarios and specialty exams. Our AI tutor explains complex medical concepts and pharmacological interactions using the latest evidence-based practice guidelines.'
     },
     {
       question: 'What kinds of medical materials can I use?',
@@ -428,11 +398,11 @@ function FAQSection() {
       answer: 'Yes! Our AI tutor allows you to have interactive conversations with your learning materials. Ask specific questions, get detailed explanations, and receive answers with references back to the original content.'
     },
     {
-      question: 'Does LearnIn make quizzes, flashcards, and practice tests?',
-      answer: 'Absolutely! ProntoTech AI automatically generates quizzes, flashcards, and practice tests from your materials. You can customize the difficulty level and focus on specific topics you want to master.'
+      question: 'Does NCLIPS make quizzes, flashcards, and practice tests?',
+      answer: 'Absolutely! NCLIPS automatically generates quizzes, flashcards, and practice tests from your materials. You can customize the difficulty level and focus on specific topics you want to master.'
     },
     {
-      question: 'Is NurseAI Academy free for students?',
+      question: 'Is NCLIPS free for students?',
       answer: 'We offer a free starter plan for nursing students. For professional nursing staff and hospital systems needing unlimited uploads and enterprise clinical data analysis, we offer comprehensive premium tiers.'
     }
   ];
@@ -529,7 +499,7 @@ function ContactSection() {
                 </div>
                 <div>
                   <p className="text-sm font-bold text-gray-900">AI Innovation</p>
-                  <p className="text-xs text-gray-500">ProntoTech Solutions</p>
+                  <p className="text-xs text-gray-500">NCLIPS Solutions</p>
                 </div>
               </div>
             </div>
@@ -598,7 +568,7 @@ function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="col-span-1 md:col-span-2">
-            <ProntoTechLogo />
+            <NCLIPSLogo />
             <p className="mt-4 text-gray-500 max-w-sm">
               Providing cutting-edge AI solutions to empower healthcare professionals and organizations.
             </p>
@@ -624,7 +594,7 @@ function Footer() {
         </div>
         <div className="pt-8 border-t border-gray-100 flex flex-col md:flex-row items-center justify-between">
           <p className="text-gray-500 text-sm">
-            © 2024 ProntoTech AI Solutions. All rights reserved.
+            © 2024 NCLIPS. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="text-gray-400 hover:text-gray-600">Terms</a>
@@ -642,7 +612,7 @@ export default function LandingPage() {
     <div className="min-h-screen bg-white">
       <Navbar />
       <HeroSection />
-      <AIHelpingSection />
+      <NCLIPSAboutSection />
       <FeaturesSection />
       <TestimonialsSection />
       <FAQSection />
